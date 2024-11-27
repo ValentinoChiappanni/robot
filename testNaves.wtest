@@ -1,0 +1,31 @@
+import naves.*
+import misiones.*
+
+describe "test 5_1 valoración de Naves y de Mision" {
+	const veritech1 = new Veritech(calidad=3,arma=canionParticulas)
+	const alpha1 = new Alpha(calidad=1,arma=misiles, modelo="AFC-02")
+	const cyclone1 = new Cyclone(calidad=2,peso=1)
+
+	const cycloneM = new Cyclone(calidad=1,peso=2)
+	const veritechM = new Veritech(calidad=3,arma=canionParticulas)
+	const alphaM = new Alpha(calidad=2, arma=misiles, modelo="AFC-02B")
+	const mision1 = new Mision(nombre="mision1",naves=[cycloneM,veritechM,alphaM])
+	
+			
+	test "Veritech con cañon de partículas" {
+		assert.equals(60+20,veritech1.valoracion())
+	}
+	
+	test "Alpha Fighter con misiles modelo AFC-02" {
+		assert.equals(60+45+12,alpha1.valoracion())
+	}
+	
+	test "Cyclone peso 1 tonelada en modo batalla es especial)" {
+		cyclone1.cambiarAModoBatalla()
+		assert.that(cyclone1.esEspecial())
+	}
+	
+	test "mision 1, tiene una valoración de" {
+		assert.equals(15*3-3,mision1.valoracion())
+	}
+}
